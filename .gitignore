@@ -1,3 +1,4 @@
 data/
 default.nix
 moichor.log
+.venv/
