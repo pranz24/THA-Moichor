@@ -28,15 +28,16 @@ def verify_tags(img, metadata):
         assert(ds.InstitutionName == metadata['clinic-name'])  # Institution Name
         assert(ds.PatientID == metadata['patient_id'])
         return True
-    except Exception as err:
-        logger.error(traceback.format_exc())
+    except AssertionError as err:
+        logger.error(f"Tag mismatch: {err}")
+        #logger.error(traceback.format_exc())
         return False
 
 
 """
 Exponential Backoff. This makes a request retry up to attempts set above with exponential backoff.
 """
-def exp_backoff_retry(max_retry, api_type, url, data, headers, backoff_in_seconds=2):
+def make_api_request(max_retry, api_type, url, data, headers, backoff_in_seconds=2):
     attempts = 1
     while True:
         try:
@@ -73,7 +74,7 @@ def fetch_metadata(sample_id, priority, max_retry):
         }
     
     
-    response = exp_backoff_retry(max_retry=max_retry, api_type="get", url=url, data=json.dumps(payload), headers=headers)
+    response = make_api_request(max_retry=max_retry, api_type="get", url=url, data=json.dumps(payload), headers=headers)
     
     if (response == False):
         return False
@@ -88,21 +89,29 @@ def fetch_metadata(sample_id, priority, max_retry):
 
 
 """
-Update tags in all dicom images with fetched metadata
+Update tags in all dicom images with fetched metadata.
+Read image in directory -> Update tags -> overwrite the existing image with updated tags
+
+Tag References:
+https://dicom.innolitics.com/ciods
+https://www.dicomlibrary.com/dicom/dicom-tags/
 """
 def update_image_tags(filepath, metadata):
+    # Find all dicom files in the directory
     get_imgs = list(Path(filepath).rglob("*.[dD][cC][mM]"))
+    
+    # Verify if there are more than one file in the directory
     if (len(get_imgs) == 0):
         log.error("No DICOM file in the path provided.")
         return False
 
     logger.debug(f"List of imgs found: {get_imgs}")
     
+    # Update images one by one
     for img in get_imgs:
         # Read all tags for image
         ds = pydicom.filereader.dcmread(img)
         
-        # https://www.dicomlibrary.com/dicom/dicom-tags/
         ds.PatientName = metadata["patient-name"]  # Patient's Name
         ds.PatientSpeciesDescription = metadata['request_species']  # Patient Species Description
         ds.BarcodeValue = metadata['test_type']   # Barcode Value
@@ -123,9 +132,17 @@ Upload all images to given API endpoint.
 Verify tags before uploading.
 """
 def upload_imgs(filepath, metadata, max_retry):
+    # Find all dicom files in the directory
     get_imgs = list(Path(filepath).rglob("*.[dD][cC][mM]"))
+    
+    # Verify if there are more than one file in the directory
+    if (len(get_imgs) == 0):
+        log.error("No DICOM file in the path provided.")
+        return False
+    
     logger.debug(f"List of imgs found: {get_imgs}")
     
+    # Setup API request parameters
     url = UPLOAD_URL
     
     headers = {
@@ -141,7 +158,8 @@ def upload_imgs(filepath, metadata, max_retry):
 
         logger.info(f"Image Upload API -> Uploading {img}")
         
-        response = exp_backoff_retry(max_retry=max_retry, api_type="post", url=url, data=data, headers=headers)
+
+        response = make_api_request(max_retry=max_retry, api_type="post", url=url, data=data, headers=headers)
     
         if (response == False):
             return False
@@ -169,7 +187,7 @@ def trigger_analytics(sample_id, request_type, max_retry):
         "x-api-key": ANALYTICS_KEY
         }
 
-    response = exp_backoff_retry(max_retry=max_retry, api_type="get", url=url, data=json.dumps(payload), headers=headers)
+    response = make_api_request(max_retry=max_retry, api_type="get", url=url, data=json.dumps(payload), headers=headers)
     
     if (response == False):
         return False
