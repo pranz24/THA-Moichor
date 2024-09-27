@@ -84,7 +84,7 @@ python main.py --sample_id <SAMPLE_ID> --max_retry <RETRY_COUNT> --attempt_numbe
 |`--sample_id`       | str  | ref0000022tes-cbc |                Sample ID used to fetch metadata and update DICOM tags                   |
 |`--max_retry`       | int  |         2         |              Number of retries before declaring failure when calling APIs               |
 |`--attempt_number`	 | int  |         1         |    Custom tag used for PatientID field in DICOM images: <sample_id>-<attempt_number>    |
-|`--directory`       | str  |     ./data/       | Path to the directory containing DICOM images. (Giving absolute path is a good practice)|
+|`--directory`       | str  |     ./data/       | Path to the directory containing DICOM images. (Using absolute path is a good practice) |
 |`--console_logs`    | bool |       False       |       Set to True to print logs to the console in addition to writing to log file       |
 
 
