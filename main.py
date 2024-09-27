@@ -21,7 +21,7 @@ ANALYTICS_URL = os.getenv('A_URL')
 ANALYTICS_KEY = os.getenv('A_KEY')
 
 """
-Update tags in all dicom images with fetched metadata.
+Verify if tag exists and update tags in all dicom images with fetched metadata.
 Get Image tags -> Update tags if needed -> overwrite the existing image with updated tags
 
 Tag References:
