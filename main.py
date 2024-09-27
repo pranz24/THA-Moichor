@@ -32,33 +32,31 @@ def update_image_tags(img, metadata):
     logger.debug(f"update image tag -> Image - {img}, Metadata - {metadata}")
     ds = pydicom.filereader.dcmread(img)
 
-    # Update the tags if needed
-    if hasattr(ds, 'PatientDescription') and (ds.PatientName != metadata["patient-name"]):
-        ds.PatientName = metadata["patient-name"]
-    else:
+    # Check if tag exist -> if not then add tag else update the tags
+    if not hasattr(ds, 'PatientDescription'):
         ds.add_new([0x0010,0x0010], "PN", metadata['patient-name'])
+    elif (ds.PatientName != metadata["patient-name"]):
+        ds.PatientName = metadata["patient-name"]
 
-    if hasattr(ds, 'PatientSpeciesDescription') and (ds.PatientSpeciesDescription != metadata["request_species"]):
-        ds.PatientSpeciesDescription = metadata["request_species"]
-    else:
+    if not hasattr(ds, 'PatientSpeciesDescription'):
         ds.add_new([0x0010,0x2201], 'LO', metadata["request_species"])
+    elif (ds.PatientSpeciesDescription != metadata["request_species"]):
+        ds.PatientSpeciesDescription = metadata["request_species"]
 
-    if hasattr(ds, 'BarcodeValue') and (ds.BarcodeValue != metadata["test_type"]):
-        ds.BarcodeValue = metadata["test_type"]
-    else:
+    if not hasattr(ds, 'BarcodeValue'):
         ds.add_new([0x2200,0x0005], "LT", metadata['test_type'])
+    elif (ds.BarcodeValue != metadata["test_type"]):
+        ds.BarcodeValue = metadata["test_type"]
 
-
-    if hasattr(ds, 'InstitutionName') and (ds.InstitutionName != metadata["clinic-name"]):
-        ds.InstitutionName = metadata["clinic-name"]
-    else:
+    if not hasattr(ds, 'InstitutionName'):
         ds.add_new([0x0008,0x0080], "LO", metadata['clinic-name'])
+    elif (ds.InstitutionName != metadata["clinic-name"]):
+        ds.InstitutionName = metadata["clinic-name"]
 
-
-    if hasattr(ds, 'PatientID') and (ds.PatientID != metadata["patient_id"]):
-        ds.PatientID = metadata["patient_id"]
-    else:
+    if not hasattr(ds, 'PatientID'):
         ds.add_new([0x0010,0x0020], "LO", metadata['patient_id'])
+    elif (ds.PatientID != metadata["patient_id"]):
+        ds.PatientID = metadata["patient_id"]
 
     # Save the changes made to the DICOM file
     ds.save_as(img)
