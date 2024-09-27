@@ -1,0 +1,31 @@
+09/26/2024 22:23:09 | [INFO] | Fetching Metadata...
+09/26/2024 22:23:09 | [INFO] | Metadata API -> Received Status Code: 200
+09/26/2024 22:23:09 | [INFO] | Upload images to endpoint...
+09/26/2024 22:23:09 | [INFO] | Tags verified and updated successfully for data/80b38c5c-0ac7-4361-bc6f-131f500de9da.dcm
+09/26/2024 22:23:09 | [INFO] | Image Upload API -> Uploading data/80b38c5c-0ac7-4361-bc6f-131f500de9da.dcm
+09/26/2024 22:23:10 | [INFO] | Image Upload API -> Received Status Code: 200 - Image: data/80b38c5c-0ac7-4361-bc6f-131f500de9da.dcm
+09/26/2024 22:23:10 | [INFO] | Tags verified and updated successfully for data/33e89e82-f732-4728-8a64-3570b7affc4d.dcm
+09/26/2024 22:23:10 | [INFO] | Image Upload API -> Uploading data/33e89e82-f732-4728-8a64-3570b7affc4d.dcm
+09/26/2024 22:23:11 | [INFO] | Image Upload API -> Received Status Code: 200 - Image: data/33e89e82-f732-4728-8a64-3570b7affc4d.dcm
+09/26/2024 22:23:11 | [INFO] | Tags verified and updated successfully for data/12eea80f-5a2d-465a-a645-0363919c5240.dcm
+09/26/2024 22:23:11 | [INFO] | Image Upload API -> Uploading data/12eea80f-5a2d-465a-a645-0363919c5240.dcm
+09/26/2024 22:23:27 | [INFO] | Image Upload API -> Received Status Code: 200 - Image: data/12eea80f-5a2d-465a-a645-0363919c5240.dcm
+09/26/2024 22:23:27 | [INFO] | Tags verified and updated successfully for data/54f43b09-ecdf-4d70-8f4a-49375d80242f.dcm
+09/26/2024 22:23:27 | [INFO] | Image Upload API -> Uploading data/54f43b09-ecdf-4d70-8f4a-49375d80242f.dcm
+09/26/2024 22:23:28 | [INFO] | Image Upload API -> Received Status Code: 200 - Image: data/54f43b09-ecdf-4d70-8f4a-49375d80242f.dcm
+09/26/2024 22:23:28 | [INFO] | Tags verified and updated successfully for data/0aefa15e-ae7b-46bd-adee-04eba7d89f35.dcm
+09/26/2024 22:23:28 | [INFO] | Image Upload API -> Uploading data/0aefa15e-ae7b-46bd-adee-04eba7d89f35.dcm
+09/26/2024 22:24:16 | [INFO] | Image Upload API -> Received Status Code: 200 - Image: data/0aefa15e-ae7b-46bd-adee-04eba7d89f35.dcm
+09/26/2024 22:24:16 | [INFO] | Tags verified and updated successfully for data/98a7b976-6cf4-4875-9d75-e637c3eeb6b0.dcm
+09/26/2024 22:24:16 | [INFO] | Image Upload API -> Uploading data/98a7b976-6cf4-4875-9d75-e637c3eeb6b0.dcm
+09/26/2024 22:24:17 | [INFO] | Image Upload API -> Received Status Code: 200 - Image: data/98a7b976-6cf4-4875-9d75-e637c3eeb6b0.dcm
+09/26/2024 22:24:17 | [INFO] | Tags verified and updated successfully for data/53a51594-228d-45ad-b741-3d782d448a8c.dcm
+09/26/2024 22:24:17 | [INFO] | Image Upload API -> Uploading data/53a51594-228d-45ad-b741-3d782d448a8c.dcm
+09/26/2024 22:26:36 | [INFO] | Image Upload API -> Received Status Code: 200 - Image: data/53a51594-228d-45ad-b741-3d782d448a8c.dcm
+09/26/2024 22:26:38 | [INFO] | Tags verified and updated successfully for data/f3cd8f84-949a-4a12-87f2-1d9db9829bb7.dcm
+09/26/2024 22:26:38 | [INFO] | Image Upload API -> Uploading data/f3cd8f84-949a-4a12-87f2-1d9db9829bb7.dcm
+09/26/2024 22:33:21 | [INFO] | Image Upload API -> Received Status Code: 200 - Image: data/f3cd8f84-949a-4a12-87f2-1d9db9829bb7.dcm
+09/26/2024 22:33:21 | [INFO] | Successfully uploaded all images
+09/26/2024 22:33:22 | [INFO] | Trigger Analytics...
+09/26/2024 22:33:22 | [INFO] | Analytics API -> Received Status Code: 200
+09/26/2024 22:33:22 | [INFO] | Success
