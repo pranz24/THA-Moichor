@@ -7,14 +7,18 @@ import requests
 import argparse
 import traceback
 from pathlib import Path
+from dotenv import load_dotenv
 
-# Env Variables
+# Load the .anv file
+load_dotenv()
+
 METADATA_URL = os.getenv('MD_URL')
 METADATA_KEY = os.getenv('MD_KEY')
 UPLOAD_URL = os.getenv('U_URL')
 UPLOAD_KEY = os.getenv('U_KEY')
 ANALYTICS_URL = os.getenv('A_URL')
 ANALYTICS_KEY = os.getenv('A_KEY')
+
 
 """
 Verify if the tags exists and the values are correct.
@@ -36,6 +40,8 @@ def verify_tags(img, metadata):
 
 """
 Exponential Backoff. This makes a request retry up to attempts set above with exponential backoff.
+https://stackoverflow.com/questions/69855084/retry-with-python-requests-when-status-code-200
+https://medium.com/@roopa.kushtagi/decoding-exponential-backoff-a-blueprint-for-robust-communication-de21459aa98f
 """
 def make_api_request(max_retry, api_type, url, data, headers, backoff_in_seconds=2):
     attempts = 1
@@ -205,7 +211,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Moichor Image Upload Script Args')
     parser.add_argument('--sample_id', type=str, default="ref0000022tes-cbc",
                         help='Sample ID (default: ref0000022tes-cbc)')
-    parser.add_argument('--backoff_attempts', type=int, default=2,
+    parser.add_argument('--log_level', type=int, default=2,
                         help='Number of attempts before declaring failure')
     parser.add_argument('--attempt_number', type=str, default="001",
                         help='Workaround for "Already Stored" response - PatientID tag [0010, 0020] to: <sample-id>-<attempt-number> (default: False)')
