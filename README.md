@@ -90,7 +90,7 @@ python main.py --sample_id <SAMPLE_ID> --max_retry <RETRY_COUNT> --attempt_numbe
 
 ### Logging
 
-Logs are stored in `<SAMPLE_ID>-<ATTEMPT_NO>.log` by default. You can enable console logging with the ```--console_logs True``` argument to display logs on the terminal.
+Logs are stored in `moichor-<SAMPLE_ID>-<ATTEMPT_NO>.log` by default. You can enable console logging with the ```--console_logs True``` argument to display logs on the terminal.
 
 
 ![Screenshot_20240926_234357](https://github.com/user-attachments/assets/d0a3073d-8670-4478-bbac-824db8436ca8)
